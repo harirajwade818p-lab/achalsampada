@@ -1,0 +1,224 @@
+/* Admin Dashboard Styles */
+
+:root {
+    --admin-primary: #343a40;
+    --admin-secondary: #495057;
+    --admin-light: #f8f9fa;
+    --admin-dark: #212529;
+}
+
+body {
+    background-color: var(--admin-light);
+}
+
+/* Admin Sidebar */
+.admin-sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: var(--admin-primary);
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--admin-secondary);
+    text-align: center;
+}
+
+.sidebar-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.admin-sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 12px 20px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+    background: var(--admin-secondary);
+    color: white;
+    border-left-color: #0d6efd;
+}
+
+.admin-sidebar .nav-link i {
+    width: 20px;
+}
+
+/* Stat Cards */
+.stat-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card .card-body {
+    padding: 20px;
+}
+
+/* Main Content */
+.flex-grow-1 {
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .admin-sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .flex-grow-1 {
+        margin-left: 0;
+    }
+}
+
+/* Table Styles */
+.table thead th {
+    background-color: var(--admin-light);
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.card-header {
+    background-color: white;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+}
+
+/* Button Styles */
+.btn-group .btn {
+    font-size: 0.875rem;
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 8px;
+    border: none;
+}
+
+.modal-header {
+    background-color: var(--admin-light);
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Form Styles */
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Utility Classes */
+.text-truncate {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+/* Loading Spinner */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Sidebar Toggle */
+#sidebarToggle {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    #sidebarToggle {
+        display: block;
+    }
+}
+
+/* Activity Log */
+.activity-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-time {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Status Indicators */
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.status-indicator.active {
+    background-color: #28a745;
+}
+
+.status-indicator.inactive {
+    background-color: #dc3545;
+}
+
+.status-indicator.pending {
+    background-color: #ffc107;
+}

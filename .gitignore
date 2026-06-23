@@ -1,0 +1,27 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Uploads and user-generated content
+uploads/*
+!uploads/.gitkeep
+
+# OS and editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# PHP / logs
+*.log
+/vendor/
+
+# Python (AI backend)
+ai_backend/__pycache__/
+ai_backend/.venv/
+ai_backend/venv/
+*.pyc

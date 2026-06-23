@@ -1,0 +1,227 @@
+# Property Marketplace AI Backend
+
+Python Flask API for AI-powered features of the Property Marketplace.
+
+## Features
+
+1. **Fraud Detection** - Detect potentially fraudulent property listings
+2. **Duplicate Detection** - Find duplicate or similar property listings
+3. **Description Generator** - Generate professional property descriptions
+4. **Image Quality Check** - Analyze image quality and provide recommendations
+5. **Property Recommendations** - Recommend properties based on user preferences
+6. **Price Estimation** - Estimate property prices based on features
+
+## Installation
+
+1. **Install Python 3.8 or higher**
+
+2. **Create virtual environment**
+   ```bash
+   cd ai_backend
+   python -m venv venv
+   ```
+
+3. **Activate virtual environment**
+   - Windows: `venv\Scripts\activate`
+   - Linux/Mac: `source venv/bin/activate`
+
+4. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Running the Server
+
+```bash
+python app.py
+```
+
+The server will start on `http://localhost:5000`
+
+## API Endpoints
+
+### 1. Fraud Detection
+**POST** `/api/ai/fraud-detection`
+
+Request Body:
+```json
+{
+  "title": "Property Title",
+  "description": "Property description",
+  "price": 5000000,
+  "area_size": 1000
+}
+```
+
+Response:
+```json
+{
+  "fraud_score": 25,
+  "risk_level": "low",
+  "risk_factors": [],
+  "is_suspicious": false
+}
+```
+
+### 2. Duplicate Detection
+**POST** `/api/ai/duplicate-detection`
+
+Request Body:
+```json
+{
+  "property": {
+    "title": "Property Title",
+    "price": 5000000,
+    "area_size": 1000,
+    "city_id": 1,
+    "area_id": 1
+  },
+  "existing_properties": [...]
+}
+```
+
+### 3. Generate Description
+**POST** `/api/ai/generate-description`
+
+Request Body:
+```json
+{
+  "type_name": "Flat",
+  "area_size": 1000,
+  "area_unit": "sqft",
+  "bhk": 2,
+  "city_name": "Mumbai",
+  "furnishing": "semi_furnished",
+  "construction_status": "ready_to_move",
+  "amenities": ["parking", "gym", "pool"]
+}
+```
+
+### 4. Image Quality Check
+**POST** `/api/ai/image-quality`
+
+Request Body:
+```json
+{
+  "image": "base64_encoded_image_string"
+}
+```
+
+Response:
+```json
+{
+  "quality_score": 85,
+  "quality_level": "good",
+  "resolution": "1920x1080",
+  "file_size_kb": 245.5,
+  "issues": [],
+  "is_acceptable": true
+}
+```
+
+### 5. Property Recommendations
+**POST** `/api/ai/recommendations`
+
+Request Body:
+```json
+{
+  "preferences": {
+    "property_type": "flat-apartment",
+    "city": "Mumbai",
+    "min_price": 3000000,
+    "max_price": 8000000,
+    "min_area": 800
+  },
+  "properties": [...]
+}
+```
+
+### 6. Price Estimation
+**POST** `/api/ai/price-estimation`
+
+Request Body:
+```json
+{
+  "type_slug": "flat-apartment",
+  "area_size": 1000,
+  "city_name": "Mumbai",
+  "bhk": 2,
+  "furnishing": "semi_furnished"
+}
+```
+
+Response:
+```json
+{
+  "estimated_price": 7500000,
+  "price_range": {
+    "min": 6375000,
+    "max": 8625000
+  },
+  "price_per_sqft": 7500,
+  "confidence": "medium"
+}
+```
+
+### 7. Health Check
+**GET** `/api/ai/health`
+
+Response:
+```json
+{
+  "status": "healthy",
+  "timestamp": "2024-01-01T12:00:00",
+  "version": "1.0.0"
+}
+```
+
+## Integration with PHP Backend
+
+To integrate with the PHP backend, use cURL or file_get_contents:
+
+```php
+function callAI($endpoint, $data) {
+    $url = 'http://localhost:5000' . $endpoint;
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json'
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+
+// Example: Fraud Detection
+$result = callAI('/api/ai/fraud-detection', [
+    'title' => $property['title'],
+    'description' => $property['description'],
+    'price' => $property['price']
+]);
+```
+
+## Development
+
+To add new AI features:
+
+1. Create a new function in `app.py`
+2. Add the corresponding API route
+3. Update this README with documentation
+4. Test the endpoint
+
+## Production Deployment
+
+For production deployment:
+
+1. Use a production WSGI server (Gunicorn, uWSGI)
+2. Enable HTTPS
+3. Add rate limiting
+4. Implement proper error handling
+5. Add logging
+6. Use environment variables for configuration
+
+## License
+
+This is part of the Property Marketplace project.
